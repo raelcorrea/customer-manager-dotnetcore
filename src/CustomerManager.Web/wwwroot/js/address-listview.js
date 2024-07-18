@@ -23,7 +23,6 @@ const updateAddressListView = () => {
     addresses.forEach(addr => itemListHtml += itemAddressStr(addr));
     result.insertAdjacentHTML('afterbegin', itemListHtml);
     eventRemoveAddress();
-    console.log('evento remove address')
     if (addresses.length == 0) {
         result.insertAdjacentHTML('afterbegin', emptyListStr());
     }
@@ -109,6 +108,8 @@ function submitAddress(form) {
             formData.append(input.name, input.value);
         });
 
+
+
         button.setAttribute('disabled', true);
         loading.style.display = "inline-block";
 
@@ -116,7 +117,12 @@ function submitAddress(form) {
             method: methodOpt,
             body: formData
         }).then(res => res.json()).then((address) => {
-            addressDataList.add(address);
+
+            if (methodOpt == "POST")
+                addressDataList.add(address);
+            else
+                addressDataList.edit(objData);
+
             loading.style.display = "none";
             modal.hide();
             button.removeAttribute('disabled');
@@ -148,4 +154,37 @@ function removeAddress(addressId, customerId) {
 $(function () {
     Subscriber.subscribe("update_address_listview", updateAddressListView);
     eventRemoveAddress();
+
+    var btnZipCode = $(".btn-zipcode");
+
+    btnZipCode.on('click', (e) => {
+        e.preventDefault();
+        const el = $(e.target);
+        const form = el.parents("form");
+        const fields = form.find('input');
+        const zipCode = form.find('input[name="ZipCode"]');
+        el.prop('disabled', true);
+        if (zipCode.val() != '') {
+            fetch(`https://viacep.com.br/ws/${zipCode.val()}/json/`).then((res) => res.json()).then((zipCode) => {
+                console.log(zipCode)
+                el.prop('disabled', false);
+                fields.each((index, input) => {
+                    let { name, value } = input;
+                    var map = {
+                        "City": "localidade",
+                        "Street": "logradouro",
+                        "State": "uf"
+                    };
+
+                    if (map[name])
+                        input.value = zipCode[map[name]];
+
+                })
+            })
+        } else {
+            el.prop('disabled', false);
+            alert('Insira um valor no CEP')
+        }
+    })
 });
+
