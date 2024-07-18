@@ -1,0 +1,38 @@
+﻿@model Address
+
+<form class="form" method="post" onsubmit="return submitAddress(this)" novalidate>
+    <div class="modal-body">
+        <input type="hidden" asp-for="CustomerId" />
+        <p>
+            <div class="input-group">
+                <input asp-for="ZipCode" class="form-control" required placeholder="CEP" />
+                <button class="btn btn-sm btn-primary"><i class="bi bi-search"></i></button>
+
+            </div>
+            <span class="text-danger" asp-validation-for="ZipCode"></span>
+        </p>
+
+        <p>
+            <input asp-for="Street" class="form-control" required placeholder="Endereço" />
+            <span class="text-danger" asp-validation-for="Street"></span>
+        </p>
+        <p>
+            <input asp-for="City" class="form-control" required placeholder="Cidade" />
+            <span class="text-danger" asp-validation-for="City"></span>
+        </p>
+        <p>
+            <input asp-for="State" class="form-control" required placeholder="Estado" />
+            <span class="text-danger" asp-validation-for="State"></span>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> Cancelar</button>
+        <button type="submit" class="btn btn-primary btn-sm">
+            <i class="bi bi-floppy"></i>
+            Salvar 
+            <div id="loading" class="spinner-border spinner-border-sm" role="status" style="display:none">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </button>
+    </div>
+</form>

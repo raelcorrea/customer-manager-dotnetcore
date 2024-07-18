@@ -1,0 +1,73 @@
+﻿@using CustomerManager.Web.Models.ViewModels
+@using System.Text.Json;
+@model AddressListView;
+
+@{
+    var addressList = Model.Addresses;
+    var addressListJson = JsonSerializer.Serialize(Model.Addresses);
+}
+<section class="list-view">
+    <header class="d-flex justify-content-between align-items-center w-100">
+        <h6>Lista de Endereços:</h6>
+        <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalAddressRegisterForm"><i class="bi bi-plus"></i> Endereço</button>
+    </header>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Endereço</th>
+                <th>Cidade</th>
+                <th>CEP</th>
+                <th>Açoes</th>
+            </tr>
+        </thead>
+        <tbody id="addressResult">
+            @if (addressList.Any())
+            {
+                @foreach (Address address in Model.Addresses)
+                {
+                    <tr>
+                        <td>@address.Street</td>
+                        <td>@address.City</td>
+                        <td>@address.ZipCode</td>
+                        <td><a href="#">Editar</a></td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4">
+                        <p class="text-center">Nenhum endereço cadastrado.</p>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="modalAddressRegisterForm" tabindex="-1" aria-labelledby="modalAddressRegisterForm" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar Endereço</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            @await Html.PartialAsync("Partials/_AddressRegisterForm", new Address { CustomerId = Model.CustomerId })
+        </div>
+    </div>
+</div>
+<input id="addressListHidenField" type="hidden" value="@addressListJson">
+
+@using (Html.BeginScripts())
+{
+    <script src="~/js/subscriber.js"></script>
+    <script src="~/js/address.js"></script>
+    <script src="~/js/address-list-view.js"></script>
+    <script>
+        const addressListHidenField = document.querySelector("#addressListHidenField")
+        const addresses = JSON.parse(addressListHidenField.value);
+        addresses.forEach(address => addressDataList.add(address));
+        console.log(addressDataList.getAddresses())
+    </script>
+}

@@ -1,0 +1,29 @@
+﻿@model Customer
+
+<form class="form" asp-controller="Customer" asp-action="Register" method="post" novalidate>
+    <p>
+        <label class="form-label">Nome Completo</label>
+        <input asp-for="Name" class="form-control" required placeholder="Informe o nome completo" />
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </p>
+    <p>
+        <label class="form-label">Telefone</label>
+        <input asp-for="Phone" class="form-control" required placeholder="Informe o numero de telefone" />
+        <span class="text-danger" asp-validation-for="Phone"></span>
+    </p>
+    <p>
+        <label class="form-label">E-mail</label>
+        <input asp-for="Email" class="form-control" required placeholder="Informe o endereço de e-mail" />
+        <span class="text-danger" asp-validation-for="Email"></span>
+    </p>
+    <p>
+        <label class="form-label">CPF</label>
+        <input asp-for="CPF" class="form-control" required placeholder="Informe o numero do CPF" />
+        <span class="text-danger" asp-validation-for="CPF"></span>
+    </p>
+    <p>
+        <button type="submit" class="btn btn-sm btn-primary">
+            <i class="bi bi-floppy"></i> Salvar
+        </button>
+    </p>
+</form>

@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34916.146
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerManager.Web", "CustomerManager.Web\CustomerManager.Web.csproj", "{51D0262A-E815-4AFB-9CD7-AD83756D013A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A8797E6E-3823-4A46-A60B-DD5B5CA03D48}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\.gitattributes = ..\..\.gitattributes
+		..\..\.gitignore = ..\..\.gitignore
+		..\..\README.md = ..\..\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A4ADEE8A-A1BD-4AE2-A5CD-FF96A103BD4D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{51D0262A-E815-4AFB-9CD7-AD83756D013A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51D0262A-E815-4AFB-9CD7-AD83756D013A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51D0262A-E815-4AFB-9CD7-AD83756D013A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51D0262A-E815-4AFB-9CD7-AD83756D013A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{51D0262A-E815-4AFB-9CD7-AD83756D013A} = {A4ADEE8A-A1BD-4AE2-A5CD-FF96A103BD4D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4075E045-B52A-493F-BD7C-E341308670E3}
+	EndGlobalSection
+EndGlobal
