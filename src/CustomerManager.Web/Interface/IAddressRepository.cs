@@ -6,8 +6,9 @@ namespace CustomerManager.Web.Interface
     {
         Task<int> CreateAsync(Address model);
         Task<int> UpdateAsync(Address model);
-        Task<int> DeleteAsync(int id);
+        Task<int> DeleteAsync(int addressId, int customerId);
         Task<Address?> GetByIdAsync(int addressId, int customerId);
+        Task<Address?> GetByZipCodeAsync(string zipCode, int customerId);
         Task<IEnumerable<Address>> GetAllAsync(int customerId);
     }
 }

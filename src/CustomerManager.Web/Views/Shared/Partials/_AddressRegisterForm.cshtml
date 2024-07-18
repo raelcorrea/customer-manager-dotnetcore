@@ -1,11 +1,12 @@
 ﻿@model Address
 
-<form class="form" method="post" onsubmit="return submitAddress(this)" novalidate>
+<form id="addressForm" class="form" method="post" onsubmit="return submitAddress(this)" novalidate>
     <div class="modal-body">
+        <input type="hidden" name="Id" value="@Model.Id" />
         <input type="hidden" asp-for="CustomerId" />
         <p>
             <div class="input-group">
-                <input asp-for="ZipCode" class="form-control" required placeholder="CEP" />
+                <input asp-for="ZipCode" class="form-control cep-mask" required placeholder="CEP" />
                 <button class="btn btn-sm btn-primary"><i class="bi bi-search"></i></button>
 
             </div>

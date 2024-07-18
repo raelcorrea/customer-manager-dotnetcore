@@ -8,18 +8,14 @@
     </p>
     <p>
         <label class="form-label">Telefone</label>
-        <input asp-for="Phone" class="form-control" required placeholder="Informe o numero de telefone" />
+        <input asp-for="Phone" class="form-control tel-mask" required placeholder="Informe o numero de telefone" />
         <span class="text-danger" asp-validation-for="Phone"></span>
     </p>
     <p>
-        <label class="form-label">E-mail</label>
-        <input asp-for="Email" class="form-control" required placeholder="Informe o endereço de e-mail" />
-        <span class="text-danger" asp-validation-for="Email"></span>
-    </p>
-    <p>
         <label class="form-label">CPF</label>
-        <input asp-for="CPF" class="form-control" required placeholder="Informe o numero do CPF" />
+        <input asp-for="CPF" class="form-control cpf-mask" required placeholder="Informe o numero do CPF" />
         <span class="text-danger" asp-validation-for="CPF"></span>
+        @Html.ValidationMessage("CustomerIsRegistered", new { @class="text-danger"})
     </p>
     <p>
         <button type="submit" class="btn btn-sm btn-primary">

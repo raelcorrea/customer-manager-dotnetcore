@@ -1,4 +1,5 @@
 ﻿using CustomerManager.Web.Commons;
+using CustomerManager.Web.Commons.Utils;
 using System.ComponentModel.DataAnnotations;
 
 namespace CustomerManager.Web.Models
@@ -14,12 +15,8 @@ namespace CustomerManager.Web.Models
 		[Required(ErrorMessage = "Campo 'Telefone' é obrigatório")]
 		public string Phone { get; set; } = string.Empty;
 
-		[Required(ErrorMessage = "Campo 'Email' é obrigatório")]
-		[RegularExpression(RegexPattern.Email, ErrorMessage ="Email está invalido.")]
-		public string Email { get; set; } = string.Empty;
-
-		[Required(ErrorMessage = "Campo 'CPF' é obrigatório")]
-		public string CPF { get; set; } = string.Empty;
+        [CpfValidate]
+        public string CPF { get; set; } = string.Empty;
 
 		[Required]
 		public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

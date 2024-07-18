@@ -1,5 +1,6 @@
 ﻿using CustomerManager.Web.Interface;
 using CustomerManager.Web.Models;
+using Microsoft.VisualBasic;
 
 namespace CustomerManager.Web.Services
 {
@@ -19,11 +20,19 @@ namespace CustomerManager.Web.Services
         public async Task<int> EditAsync(Customer customer)
         {
 
+            var customerSelected = await _repository.GetByIdAsync(customer.Id);
+
             var currentDate = DateTime.UtcNow;
             customer.UpdatedAt = currentDate;
 
             customer.CPF = NormalizeString(customer.CPF);
             customer.Phone = NormalizeString(customer.Phone);
+
+            if(customerSelected != null && customerSelected.CPF != customer.CPF)
+            {
+                var isCpfRegistered = await _repository.GetByCPFAsync(customer.CPF);
+                if (isCpfRegistered is not null) throw new Exception("CPF já está cadastrado");
+            }
 
             return await _repository.UpdateAsync(customer);
         }
@@ -50,6 +59,11 @@ namespace CustomerManager.Web.Services
 
             customer.CPF = NormalizeString(customer.CPF);
             customer.Phone = NormalizeString(customer.Phone);
+
+            var isCustomerRegistered = await _repository.GetByCPFAsync(customer.CPF);
+
+            if (isCustomerRegistered is not null) throw new Exception("CPF já está cadastrado");
+
 
             return await _repository.CreateAsync(customer);
         }

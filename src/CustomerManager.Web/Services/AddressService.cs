@@ -34,9 +34,14 @@ namespace CustomerManager.Web.Services
             return await _repository.GetByIdAsync(addressId, customerId);
         }
 
+        public async Task<Address?> GetByZipCodeAsync(string zipCode, int customerId)
+        {
+            return await _repository.GetByZipCodeAsync(zipCode, customerId);
+        }
+
         public async Task<int> RemoveAsync(Address address)
         {
-            return await _repository.DeleteAsync(address.Id);
+            return await _repository.DeleteAsync(address.Id, address.CustomerId);
         }
         #endregion
 

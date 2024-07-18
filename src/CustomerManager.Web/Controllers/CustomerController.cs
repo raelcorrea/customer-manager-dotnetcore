@@ -40,9 +40,18 @@ namespace CustomerManager.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var customerRegistered = await _service.RegisterAsync(customer);
-                var customerSelected = await _service.GetByCpfAsync(customer.CPF);
-                return RedirectToAction("Edit", new { id = customerSelected.Id });
+                try
+                {
+                    var customerRegistered = await _service.RegisterAsync(customer);
+                    var customerSelected = await _service.GetByCpfAsync(customer.CPF);
+                    return RedirectToAction("Edit", new { id = customerSelected.Id });
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("CustomerIsRegistered", ex.Message);
+                    return View(customer);
+                }
             }
             else
             {
@@ -55,13 +64,28 @@ namespace CustomerManager.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Customer customer)
         {
+            var customerViewModel = new CustomerEditFormViewModel();
+
             if (ModelState.IsValid)
             {
-                var customers = await _service.EditAsync(customer);
-                return RedirectToAction("Index");
+                try
+                {
+                    var customers = await _service.EditAsync(customer);
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+
+                    ModelState.AddModelError("CustomerIsRegistered", ex.Message);
+                    customerViewModel.Customer = customer;
+                    customerViewModel.Addresses = await _addressService.GetAllAsync(customer.Id);
+                    return View(customerViewModel);
+                }
             }
             else
             {
+                customerViewModel.Customer = customer;
+                customerViewModel.Addresses = await _addressService.GetAllAsync(customer.Id);
                 return View(customer);
             }
         }

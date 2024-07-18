@@ -20,25 +20,34 @@ namespace CustomerManager.Web.Repositories
             return await _connection.ExecuteAsync(query, model);
         }
 
-        public Task<int> DeleteAsync(int id)
+        public async Task<int> DeleteAsync(int addressId, int customerId)
         {
-            throw new NotImplementedException();
+            var query = "DELETE FROM Address WHERE Id=@Id AND CustomerId=@CustomerId";
+            return await _connection.ExecuteAsync(query, new { CustomerId = customerId, Id = addressId });
         }
 
         public Task<IEnumerable<Address>> GetAllAsync(int customerId)
         {
             var query = "SELECT * FROM Address WHERE CustomerId = @CustomerId";
-            return _connection.QueryAsync<Address>(query, new { CustomerId = customerId});
+            return _connection.QueryAsync<Address>(query, new { CustomerId = customerId });
         }
 
-        public Task<Address?> GetByIdAsync(int addressId, int customerId)
+        public async Task<Address?> GetByIdAsync(int addressId, int customerId)
         {
-            throw new NotImplementedException();
+            var query = "SELECT * FROM Address WHERE CustomerId = @CustomerId AND Id = @AddressId";
+            return await _connection.QueryFirstOrDefaultAsync<Address?>(query, new { CustomerId = customerId, AddressId = addressId });
         }
 
-        public Task<int> UpdateAsync(Address model)
+        public async Task<Address?> GetByZipCodeAsync(string zipCode, int customerId)
         {
-            throw new NotImplementedException();
+            var query = "SELECT * FROM Address WHERE CustomerId = @CustomerId AND ZipCode = @ZipCode";
+            return await _connection.QueryFirstOrDefaultAsync<Address?>(query, new { CustomerId = customerId, ZipCode = zipCode });
+        }
+
+        public async Task<int> UpdateAsync(Address model)
+        {
+            var query = "UPDATE Address SET ZipCode=@ZipCode, Street=@Street, City=@City, State=@State WHERE Id=@Id AND CustomerId=@CustomerId";
+            return await _connection.ExecuteAsync(query, model);
         }
     }
 }

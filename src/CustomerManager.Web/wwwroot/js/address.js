@@ -1,7 +1,6 @@
-﻿/// <reference path="subscriber.js" />
-function AddressList() {
+﻿function AddressList() {
 
-    const addressList = [];
+    let addressList = [];
 
     return {
         load: (addresses) => {
@@ -12,6 +11,9 @@ function AddressList() {
         },
         add: (address) => {
             addressList.push(address);
+        },
+        clear: () => {
+            addressList = [];
         }
     }
 }

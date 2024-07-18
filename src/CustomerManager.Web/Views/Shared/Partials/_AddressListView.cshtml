@@ -4,23 +4,27 @@
 
 @{
     var addressList = Model.Addresses;
-    var addressListJson = JsonSerializer.Serialize(Model.Addresses);
+    var options = new JsonSerializerOptions
+    {
+        PropertyNameCaseInsensitive = false
+    };
+    var addressListJson = JsonSerializer.Serialize(Model.Addresses, options);
 }
-<section class="list-view">
-    <header class="d-flex justify-content-between align-items-center w-100">
+<section class="list-view mt-5">
+    <header class="d-flex justify-content-between align-items-center border-bottom mb-3 py-3">
         <h6>Lista de Endereços:</h6>
         <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalAddressRegisterForm"><i class="bi bi-plus"></i> Endereço</button>
     </header>
-    <table class="table table-striped">
-        <thead>
+    <table class="table table-striped w-100">
+        <thead class="align-middle">
             <tr>
                 <th>Endereço</th>
                 <th>Cidade</th>
                 <th>CEP</th>
-                <th>Açoes</th>
+                <th width="10%">Açoes</th>
             </tr>
         </thead>
-        <tbody id="addressResult">
+        <tbody id="addressResult" class="align-middle">
             @if (addressList.Any())
             {
                 @foreach (Address address in Model.Addresses)
@@ -29,7 +33,10 @@
                         <td>@address.Street</td>
                         <td>@address.City</td>
                         <td>@address.ZipCode</td>
-                        <td><a href="#">Editar</a></td>
+                        <td>
+                            <a href="#" class="btn link-button btn-sm btn-edit text-success" data-bs-toggle="modal" data-bs-target="#modalAddressRegisterForm" data-id="@address.Id" data-customerId="@address.CustomerId" title="Editar endereço"><i class="bi bi-pencil-square"></i></a>
+                            <a href="#" class="btn link-button btn-sm btn-remove text-danger" data-id="@address.Id" data-customerId="@address.CustomerId" title="Remover endereço"><i class="bi bi-trash"></i></a>
+                        </td>
                     </tr>
                 }
             }
@@ -37,7 +44,7 @@
             {
                 <tr>
                     <td colspan="4">
-                        <p class="text-center">Nenhum endereço cadastrado.</p>
+                        <p class="text-center mb-0">Nenhum endereço cadastrado.</p>
                     </td>
                 </tr>
             }
@@ -57,17 +64,18 @@
         </div>
     </div>
 </div>
+
+
 <input id="addressListHidenField" type="hidden" value="@addressListJson">
 
 @using (Html.BeginScripts())
 {
     <script src="~/js/subscriber.js"></script>
     <script src="~/js/address.js"></script>
-    <script src="~/js/address-list-view.js"></script>
+    <script src="~/js/address-listview.js"></script>
     <script>
         const addressListHidenField = document.querySelector("#addressListHidenField")
         const addresses = JSON.parse(addressListHidenField.value);
         addresses.forEach(address => addressDataList.add(address));
-        console.log(addressDataList.getAddresses())
     </script>
 }

@@ -10,7 +10,6 @@ namespace CustomerManager.Web.Interface
         Task<int> DeleteAsync(int id);
         Task<Customer?> GetByIdAsync(int id);
         Task<Customer?> GetByCPFAsync(string cpf);
-        Task<Customer?> GetByEmailAsync(string email);
         Task<IEnumerable<Customer>> GetAllAsync();
     }
 }

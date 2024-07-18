@@ -16,7 +16,7 @@ namespace CustomerManager.Web.Repositories
 
         public Task<int> CreateAsync(Customer model)
         {
-            var query = "INSERT INTO Customer(Name,Phone,Email,CPF,CreatedAt,UpdatedAt) VALUES(@Name,@Phone,@Email,@CPF,@CreatedAt,@UpdatedAt)";
+            var query = "INSERT INTO Customer(Name,Phone,CPF,CreatedAt,UpdatedAt) VALUES(@Name,@Phone,@CPF,@CreatedAt,@UpdatedAt)";
             return _connection.ExecuteAsync(query, model);
         }
 
@@ -38,12 +38,6 @@ namespace CustomerManager.Web.Repositories
             return await _connection.QueryFirstOrDefaultAsync<Customer?>(query, new { Cpf = cpf });
         }
 
-        public async Task<Customer?> GetByEmailAsync(string email)
-        {
-            var query = "SELECT * FROM Customer WHERE Email=@Email";
-            return await _connection.QueryFirstOrDefaultAsync<Customer?>(query, new { Email = email});
-        }
-
         public async Task<Customer?> GetByIdAsync(int id)
         {
             var query = "SELECT * FROM Customer WHERE Id=@Id";
@@ -52,7 +46,7 @@ namespace CustomerManager.Web.Repositories
 
         public async Task<int> UpdateAsync(Customer model)
         {
-            var query = "UPDATE Customer SET Name=@Name,Phone=@Phone,Email=@Email,UpdatedAt=@UpdatedAt WHERE Id=@Id";
+            var query = "UPDATE Customer SET Name=@Name,Phone=@Phone,UpdatedAt=@UpdatedAt WHERE Id=@Id";
             return await _connection.ExecuteAsync(query, model);
         }
     }
