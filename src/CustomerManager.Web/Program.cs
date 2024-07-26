@@ -1,5 +1,6 @@
-using CustomerManager.Web.Commons;
-using CustomerManager.Web.Data;
+
+using CustomerManager.Infrastructure;
+using CustomerManager.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

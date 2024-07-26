@@ -1,13 +1,14 @@
-﻿@using CustomerManager.Web.Models.ViewModels
-@using System.Text.Json;
+﻿@using System.Text.Json;
+@using CustomerManager.Web.Helpers;
+
 @model AddressListView;
 
 @{
     var addressList = Model.Addresses;
     var options = new JsonSerializerOptions
-    {
-        PropertyNameCaseInsensitive = false
-    };
+            {
+                PropertyNameCaseInsensitive = false
+            };
     var addressListJson = JsonSerializer.Serialize(Model.Addresses, options);
 }
 <section class="list-view mt-5">

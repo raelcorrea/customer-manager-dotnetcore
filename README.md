@@ -1,10 +1,15 @@
-# Sistema de Gestão de Cliente
+# Gestão de Cliente
 
 Esta é uma aplicação simples em ASP.NET Core MVC que permite o cadastro de clientes e a vinculação de 
-endereços. O projeto utiliza uma arquitetura em camadas, separando responsabilidades e implementando 
-a inversão de controle por meio da injeção de dependências. Para isso, as funcionalidades do banco de 
-dados, como consultas, inserções, atualizações e exclusões, bem como as lógicas de negócios, foram 
-abstraídas em interfaces.
+endereços. Para este projeto tento aplicar conceitos do SOLID, arquitura MVC, separação de responsabilidade, injeção de depencencias, repository pattern, observer pattern.
+
+## Para Rodar
+
+Neste projeto para rodar você precisa ter do .net 8 sdk instalado e o docker.
+
+
+
+
 
 # Dados do Projeto
 
