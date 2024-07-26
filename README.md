@@ -29,26 +29,26 @@ Para rodar esta aplicação, é preciso ter instalado o .NET 8 SDK e o docker.
 
 Primeiramente devemos rodar o docker para que o banco de dados esteja disponivel no momento que a aplicação for executada
 
-1. Acesse o diretorio do projeto
+1. Acesse o diretorio do projeto\
 ```~$ cd  customer-manager-dotnetcore```
 
-2. Na raiz do projeto temos tres aquivos importantes: 
+2. Na raiz do projeto temos tres aquivos importantes: \
    - dockerfile
    - docker-compse.yml
    - scripts.sql
 
-3. No terminal devemos digitar o seguinte comando:
+3. No terminal devemos digitar o seguinte comando:\
    ```~/customer-manager-dotnetcore$ sudo docker compose up -d```
 
-4. Checar se o container está configurado:
+4. Checar se o container está configurado:\
    ```~/customer-manager-dotnetcore$ sudo docker ps```
 
-5. Na lista de containers ativos identificar por:
+5. Na lista de containers ativos identificar por:\
    ```customer-manager-dotnetcore-sql-server```
 
 ### Rodando a aplicação
 
-A connectionstring já está configurado no appsettings da aplicação MVC, basta agora somente rodar a aplica digitando o seguint comando:
+A connectionstring já está configurado no appsettings da aplicação MVC, basta agora somente rodar a aplica digitando o seguint comando:\
 ```~/customer-manager-dotnetcore$  dotnet run --project src/CustomerManger.Web``` 
 
 
@@ -56,8 +56,8 @@ A connectionstring já está configurado no appsettings da aplicação MVC, bast
 # Dados do Projeto
 
 - **Sistema Operacional:** Windiows/Linux/MacOs\
-- **Banco de dados:** SQL Server 2029
-- **Container Plataforms:** Docker
+- **Banco de dados:** SQL Server 2029\
+- **Container Plataforms:** Docker\
 - **Framework:** .NET 8 Core SDK
   
 
