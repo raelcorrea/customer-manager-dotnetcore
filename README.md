@@ -34,7 +34,7 @@ Primeiramente devemos rodar o docker para que o banco de dados esteja disponivel
 
 2. Na raiz do projeto temos tres aquivos importantes:
    - dockerfile
-   - docker-compse.yml
+   - docker-compose.yml
    - scripts.sql
 
 3. No terminal devemos digitar o seguinte comando:\
@@ -48,7 +48,7 @@ Primeiramente devemos rodar o docker para que o banco de dados esteja disponivel
 
 ### Rodando a aplicação
 
-A connectionstring já está configurado no appsettings da aplicação MVC, basta agora somente rodar a aplica digitando o seguint comando:\
+A connectionstring já está configurado no appsettings da aplicação MVC, basta agora somente rodar a aplicação digitando o seguinte comando:\
 ```~/customer-manager-dotnetcore$  dotnet run --project src/CustomerManger.Web``` 
 
 
