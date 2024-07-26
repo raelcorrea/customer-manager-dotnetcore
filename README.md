@@ -32,7 +32,7 @@ Primeiramente devemos rodar o docker para que o banco de dados esteja disponivel
 1. Acesse o diretorio do projeto\
 ```~$ cd  customer-manager-dotnetcore```
 
-2. Na raiz do projeto temos tres aquivos importantes: \
+2. Na raiz do projeto temos tres aquivos importantes:
    - dockerfile
    - docker-compse.yml
    - scripts.sql
@@ -55,9 +55,9 @@ A connectionstring já está configurado no appsettings da aplicação MVC, bast
 
 # Dados do Projeto
 
-- **Sistema Operacional:** Windiows/Linux/MacOs\
-- **Banco de dados:** SQL Server 2029\
-- **Container Plataforms:** Docker\
+- **Sistema Operacional:** Windiows/Linux/MacOs
+- **Banco de dados:** SQL Server 2029
+- **Container Plataforms:** Docker
 - **Framework:** .NET 8 Core SDK
   
 
