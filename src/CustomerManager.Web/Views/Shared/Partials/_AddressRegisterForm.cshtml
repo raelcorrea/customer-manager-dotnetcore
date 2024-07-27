@@ -1,6 +1,6 @@
 ﻿@model Address
 
-<form id="addressForm" class="form" method="post" onsubmit="return submitAddress(this)" novalidate>
+<form id="addressForm" class="form" method="post" novalidate>
     <div class="modal-body">
         <input type="hidden" name="Id" value="@Model.Id" />
         <input type="hidden" asp-for="CustomerId" />

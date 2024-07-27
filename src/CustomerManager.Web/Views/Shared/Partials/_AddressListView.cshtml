@@ -71,12 +71,9 @@
 
 @using (Html.BeginScripts())
 {
-    <script src="~/js/subscriber.js"></script>
+    <script src="~/js/event-subscriber.js"></script>
+    <script src="~/js/list-view.js"></script>
+    <script src="~/js/zip-code.js"></script>
     <script src="~/js/address.js"></script>
-    <script src="~/js/address-listview.js"></script>
-    <script>
-        const addressListHidenField = document.querySelector("#addressListHidenField")
-        const addresses = JSON.parse(addressListHidenField.value);
-        addresses.forEach(address => addressDataList.add(address));
-    </script>
+    <script src="~/js/edit.js"></script>
 }

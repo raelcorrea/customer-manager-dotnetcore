@@ -1,5 +1,4 @@
-﻿var Subscriber = (function () {
-    // Observer  Pattern
+﻿var EventSubscriber = function () {
     const subscribers = [];
 
     const subscribe = (event, callback) => {
@@ -19,4 +18,4 @@
         unsubscribe,
         notify
     }
-})()
+}
