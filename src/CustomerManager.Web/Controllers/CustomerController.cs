@@ -1,35 +1,34 @@
-﻿using CustomerManager.Web.Interface;
+﻿using CustomerManager.Core.Interfaces;
+using CustomerManager.Core.Models;
+using CustomerManager.Core.Services;
 using CustomerManager.Web.Models;
-using CustomerManager.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection;
 
 namespace CustomerManager.Web.Controllers
 {
     public class CustomerController : Controller
     {
-        private readonly ICustomerService _service;
-        private readonly IAddressService _addressService;
-        public CustomerController(ICustomerService service, IAddressService addressService)
+        private readonly AddressService _addressService;
+        private readonly CustomerService _customerService;
+        public CustomerController(ICustomerRepository customerRepository, IAddressRepository addressRepository)
         {
-            _service = service;
-            _addressService = addressService;
+            _addressService = new AddressService(addressRepository);
+            _customerService = new CustomerService(customerRepository);
         }
         public async Task<IActionResult> Index()
         {
-            var customers = await _service.GetAllAsync();
+            var customers = await _customerService.GetAllAsync();
             return View(customers);
         }
         public async Task<IActionResult> Register()
         {
-            var customers = await _service.GetAllAsync();
+            var customers = await _customerService.GetAllAsync();
             return View(customers);
         }
         public async Task<IActionResult> Edit(int id)
         {
             var customerViewModel = new CustomerEditFormViewModel();
-            customerViewModel.Customer= await _service.GetAsync(id);
+            customerViewModel.Customer= await _customerService.GetAsync(id);
             customerViewModel.Addresses = await _addressService.GetAllAsync(id);
             return View(customerViewModel);
         }
@@ -42,8 +41,9 @@ namespace CustomerManager.Web.Controllers
             {
                 try
                 {
-                    var customerRegistered = await _service.RegisterAsync(customer);
-                    var customerSelected = await _service.GetByCpfAsync(customer.CPF);
+                    var customerRegistered = await _customerService.RegisterAsync(customer);
+                    var customerSelected = await _customerService.GetByCpfAsync(customer.CPF);
+                    if (customerSelected is null) return BadRequest("Não foi possivel encontrar o cliente");
                     return RedirectToAction("Edit", new { id = customerSelected.Id });
 
                 }
@@ -70,7 +70,7 @@ namespace CustomerManager.Web.Controllers
             {
                 try
                 {
-                    var customers = await _service.EditAsync(customer);
+                    var customers = await _customerService.EditAsync(customer);
                     return RedirectToAction("Index");
                 }
                 catch (Exception ex)

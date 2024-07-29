@@ -1,18 +1,18 @@
-﻿using CustomerManager.Web.Interface;
-using CustomerManager.Web.Models;
+﻿using CustomerManager.Core.Interfaces;
+using CustomerManager.Core.Models;
+using CustomerManager.Core.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 
 namespace CustomerManager.Web.Controllers
 {
     public class AddressController : Controller
     {
 
-        private readonly IAddressService _service;
+        private readonly AddressService _service;
 
-        public AddressController(IAddressService service)
+        public AddressController(IAddressRepository repository)
         {
-            _service = service;
+            _service = new AddressService(repository);
         }
 
 
